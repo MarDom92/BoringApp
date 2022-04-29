@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import pl.mardom92.BoringApp.model.Activity;
+import pl.mardom92.BoringApp.model.dto.ActivityDto;
 import pl.mardom92.BoringApp.service.ActivityService;
 
 @RestController
@@ -15,7 +16,7 @@ public class ActivityController {
     private final ActivityService activityService;
 
     @GetMapping()
-    public Activity getActivity() {
-        return activityService.getActivity();
+    public ActivityDto getActivityFromApi() {
+        return activityService.getActivityFromApi();
     }
 }
