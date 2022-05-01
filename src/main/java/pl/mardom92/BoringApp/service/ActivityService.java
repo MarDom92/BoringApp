@@ -5,6 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import pl.mardom92.BoringApp.model.Activity;
 import pl.mardom92.BoringApp.model.dto.ActivityDto;
+import pl.mardom92.BoringApp.model.exception.ActivityError;
+import pl.mardom92.BoringApp.model.exception.ActivityException;
 import pl.mardom92.BoringApp.model.mapper.ActivityMapper;
 import pl.mardom92.BoringApp.repository.ActivityRepository;
 
@@ -42,6 +44,8 @@ public class ActivityService {
         if (!exist) {
             activityRepository.save(activityMapper.fromDtoToEntity(activityDto));
             exist = true;
+        } else {
+            throw new ActivityException(ActivityError.ACTIVITY_EXIST);
         }
 
         return activityDto;
