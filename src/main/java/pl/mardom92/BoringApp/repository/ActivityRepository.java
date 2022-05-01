@@ -6,4 +6,6 @@ import pl.mardom92.BoringApp.model.Activity;
 
 @Repository
 public interface ActivityRepository extends JpaRepository<Activity, Long> {
+
+    boolean existsByKey(String key);
 }

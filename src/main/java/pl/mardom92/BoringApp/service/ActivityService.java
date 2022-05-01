@@ -32,4 +32,22 @@ public class ActivityService {
 
         return activities.stream().map(activityMapper::fromEntityToDto).collect(Collectors.toList());
     }
+
+    public ActivityDto getUniqueActivityDto() {
+
+        ActivityDto activityDto = getActivityFromApi();
+        String key = activityDto.getKey();
+        boolean exist = existByKey(key);
+
+        if (!exist) {
+            activityRepository.save(activityMapper.fromDtoToEntity(activityDto));
+            exist = true;
+        }
+
+        return activityDto;
+    }
+
+    private boolean existByKey(String key) {
+        return activityRepository.existsByKey(key);
+    }
 }
